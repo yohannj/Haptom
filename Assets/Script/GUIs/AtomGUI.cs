@@ -35,9 +35,23 @@ public class AtomGUI : MonoBehaviour
                     case "Carbon":
                         new_atom = AtomManager.instance.SpawnCarbon();
                         break;
+                    case "Hydrogen":
+                        new_atom = AtomManager.instance.SpawnHydrogen();
+                        break;
+                    case "Nitrogen":
+                        new_atom = AtomManager.instance.SpawnNitrogen();
+                        break;
+                    case "Oxygen":
+                        new_atom = AtomManager.instance.SpawnOxygen();
+                        break;
                     default:
                         break;
                 }
+            }
+
+            if (buttons[2])
+            {
+                Destroy(transform.parent.gameObject);
             }
         }
     }
