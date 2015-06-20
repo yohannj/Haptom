@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SphereConstructor : MonoBehaviour {
+public class AtomConstructor : MonoBehaviour {
 
 	public string type;
 	public Color _color;
