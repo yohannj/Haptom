@@ -21,7 +21,6 @@ public class AtomCollider : MonoBehaviour {
         GetComponent<Rigidbody>().useGravity = false;
 
         is_cursor_over = true;
-        //picked_button_pushed = true;
     }
 	
 	void Update () {
@@ -64,29 +63,14 @@ public class AtomCollider : MonoBehaviour {
                     }
                     break;
             }
-            
-            /*if (buttons[0] && !picked_button_pushed)
-            {
-                picked_button_pushed = true;
 
-                bool pick_done = GameObject.Find("Falcon").GetComponent<FalconManipulator>().tryPick();
-                if (pick_done) transform.parent.GetComponent<Atom>().pick();
-            }
-            else if (!buttons[0] && picked_button_pushed)
+            if (buttons[2] && !buttons[0])
             {
-                picked_button_pushed = false;
-
-                bool release_done = transform.parent.GetComponent<Atom>().release();
-                if (release_done)
+                if (state != 0)
                 {
                     GameObject.Find("Falcon").GetComponent<FalconManipulator>().release();
+                    GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = true;
                 }
-            }*/
-
-            if (buttons[2])
-            {
-                state = 0;
-                //TODO release if needed
                 Destroy(transform.parent.gameObject);
             }
         }
