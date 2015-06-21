@@ -6,14 +6,16 @@ public class Atom : MonoBehaviour {
     int valence;
     Renderer rend;
 
-    bool is_picked;
+    bool is_picked = false;
+    Vector3 my_init_picked_pos;
+    Vector3 falcon_init_picked_pos;
 
 	void Awake () {
         rend = GetComponent<Renderer>();
         var cursor_position = GameObject.FindGameObjectWithTag("Cursor").transform.position;
         transform.position = new Vector3(cursor_position.x, cursor_position.y, 2.5f);
 
-        is_picked = true;
+        isPickedOrReleased();
 
         var own_collider = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         own_collider.transform.parent = transform;
@@ -23,7 +25,11 @@ public class Atom : MonoBehaviour {
 	}
 	
 	void Update () {
-        
+        if (is_picked)
+        {
+            Vector3 diff_pos_falcon = GameObject.FindGameObjectWithTag("Cursor").transform.position - falcon_init_picked_pos;
+            transform.position = my_init_picked_pos + diff_pos_falcon;
+        }
 	}
 
     public void Set(string name, float scale, Material material, int valence)
@@ -32,5 +38,20 @@ public class Atom : MonoBehaviour {
         this.transform.localScale = new Vector3(scale, scale, scale);
         this.rend.material = material;
         this.valence = valence;
+    }
+
+    protected internal void isPickedOrReleased() {
+        is_picked = !is_picked;
+
+        if (is_picked)
+        {
+            GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = false;
+            my_init_picked_pos = transform.position;
+            falcon_init_picked_pos = GameObject.FindGameObjectWithTag("Cursor").transform.position;
+        } else
+        {
+            GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = true;
+        }
+        
     }
 }

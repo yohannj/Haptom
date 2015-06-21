@@ -4,6 +4,7 @@ using System.Collections;
 public class AtomCollider : MonoBehaviour {
 
     bool is_cursor_over;
+    bool picked_button_pushed;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class AtomCollider : MonoBehaviour {
         GetComponent<Rigidbody>().useGravity = false;
 
         is_cursor_over = true;
+        picked_button_pushed = true;
     }
 	
 	void Update () {
@@ -25,6 +27,16 @@ public class AtomCollider : MonoBehaviour {
         {
             bool[] buttons;
             FalconUnity.getFalconButtonStates(0, out buttons);
+
+            if (buttons[0] && !picked_button_pushed)
+            {
+                picked_button_pushed = true;
+                transform.parent.GetComponent<Atom>().isPickedOrReleased();
+            }
+            else if (!buttons[0] && picked_button_pushed)
+            {
+                picked_button_pushed = false;
+            }
 
             if (buttons[2])
             {
