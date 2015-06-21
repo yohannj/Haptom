@@ -18,6 +18,8 @@ public class AtomManager : MonoBehaviour {
         }
     }
 
+    private int index = -1;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -32,7 +34,7 @@ public class AtomManager : MonoBehaviour {
     {
         var new_atom_obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         var new_atom = new_atom_obj.AddComponent<Atom>();
-        new_atom.Set(name, scale, material, valence);
+        new_atom.Set(name + "_" + (++index), scale, material, valence);
 
         return new_atom_obj;
     }
