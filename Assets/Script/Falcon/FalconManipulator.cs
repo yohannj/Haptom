@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class MySphereManipulator : MonoBehaviour {
+public class FalconManipulator : MonoBehaviour {
 
 	public int falcon_num = 0;
 	public bool[] button_states = new bool[4];
@@ -88,7 +88,8 @@ public class MySphereManipulator : MonoBehaviour {
 //			Debug.Log("Error getting tip position");
 			return;
 		}
-		hapticTip.position = posTip;
+        //hapticTip.position = posTip;
+		hapticTip.position = new Vector3(posTip.x, posTip.y, 0);
 
         godObject.position = new Vector3(posGod.x, posGod.y, 0);
 		godObject.rotation = new Quaternion(0,0,0,1);

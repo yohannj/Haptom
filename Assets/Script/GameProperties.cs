@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class GameProperties : MonoBehaviour {
 
@@ -33,6 +35,17 @@ public class GameProperties : MonoBehaviour {
     }
 
     int LevelId;
+    List<int> listLevelSucceed=new List<int>();
+
+    public void AddLevelSucceeded(int i)
+    {
+        listLevelSucceed.Add(i);
+    }
+
+    public List<int> getListSuccess()
+    {
+        return listLevelSucceed;
+    }
 
     public void setLevel(int i)
     {
