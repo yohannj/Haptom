@@ -24,33 +24,38 @@ public class AtomGUI : MonoBehaviour
 
             if (buttons[0])
             {
-                atom_already_created = true;
-                GameObject new_atom;
-                var atom_name = transform.parent.name;
+                bool atom_created = GameObject.Find("Falcon").GetComponent<FalconManipulator>().tryPick();
 
-                setHalo(false);
-                rend.enabled = false;
-
-                switch (atom_name)
+                if (atom_created)
                 {
-                    case "Calcium":
-                        new_atom = AtomManager.instance.SpawnCalcium();
-                        //new_atom.transform = Falcon.instance
-                        break;
-                    case "Carbon":
-                        new_atom = AtomManager.instance.SpawnCarbon();
-                        break;
-                    case "Hydrogen":
-                        new_atom = AtomManager.instance.SpawnHydrogen();
-                        break;
-                    case "Nitrogen":
-                        new_atom = AtomManager.instance.SpawnNitrogen();
-                        break;
-                    case "Oxygen":
-                        new_atom = AtomManager.instance.SpawnOxygen();
-                        break;
-                    default:
-                        throw new Exception("Atom name not recognized in switch");
+                    atom_already_created = true;
+                    GameObject new_atom;
+                    var atom_name = transform.parent.name;
+
+                    setHalo(false);
+                    rend.enabled = false;
+
+                    switch (atom_name)
+                    {
+                        case "Calcium":
+                            new_atom = AtomManager.instance.SpawnCalcium();
+                            //new_atom.transform = Falcon.instance
+                            break;
+                        case "Carbon":
+                            new_atom = AtomManager.instance.SpawnCarbon();
+                            break;
+                        case "Hydrogen":
+                            new_atom = AtomManager.instance.SpawnHydrogen();
+                            break;
+                        case "Nitrogen":
+                            new_atom = AtomManager.instance.SpawnNitrogen();
+                            break;
+                        case "Oxygen":
+                            new_atom = AtomManager.instance.SpawnOxygen();
+                            break;
+                        default:
+                            throw new Exception("Atom name not recognized in switch");
+                    }
                 }
             }
         }

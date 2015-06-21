@@ -6,6 +6,8 @@ public class AtomCollider : MonoBehaviour {
     bool is_cursor_over;
     bool picked_button_pushed;
 
+    int over_AtomGUI_counter = 0;
+
     void Awake()
     {
         GetComponent<Renderer>().enabled = false;
@@ -30,12 +32,19 @@ public class AtomCollider : MonoBehaviour {
 
             if (buttons[0] && !picked_button_pushed)
             {
-                picked_button_pushed = true;
-                transform.parent.GetComponent<Atom>().isPickedOrReleased();
+                picked_button_pushed = GameObject.Find("Falcon").GetComponent<FalconManipulator>().tryPick();
+
+                if(picked_button_pushed) transform.parent.GetComponent<Atom>().pick();
             }
             else if (!buttons[0] && picked_button_pushed)
             {
-                picked_button_pushed = false;
+                bool release_done = transform.parent.GetComponent<Atom>().release();
+
+                if (release_done)
+                {
+                    picked_button_pushed = false;
+                    GameObject.Find("Falcon").GetComponent<FalconManipulator>().release();
+                }
             }
 
             if (buttons[2])
@@ -51,6 +60,9 @@ public class AtomCollider : MonoBehaviour {
         if (other.tag == "Cursor")
         {
             is_cursor_over = true;
+        } else if (other.GetComponent<AtomGUI>() != null)
+        {
+            ++over_AtomGUI_counter;
         }
     }
 
@@ -60,6 +72,14 @@ public class AtomCollider : MonoBehaviour {
         if (other.tag == "Cursor")
         {
             is_cursor_over = false;
+        } else if (other.GetComponent<AtomGUI>() != null)
+        {
+            --over_AtomGUI_counter;
         }
+    }
+
+
+    public int getOverAtomGUICounter() {
+        return over_AtomGUI_counter;
     }
 }

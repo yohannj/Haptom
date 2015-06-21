@@ -15,7 +15,7 @@ public class Atom : MonoBehaviour {
         var cursor_position = GameObject.FindGameObjectWithTag("Cursor").transform.position;
         transform.position = new Vector3(cursor_position.x, cursor_position.y, 2.5f);
 
-        isPickedOrReleased();
+        pick();
 
         var own_collider = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         own_collider.transform.parent = transform;
@@ -40,18 +40,25 @@ public class Atom : MonoBehaviour {
         this.valence = valence;
     }
 
-    protected internal void isPickedOrReleased() {
-        is_picked = !is_picked;
-
-        if (is_picked)
-        {
-            GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = false;
-            my_init_picked_pos = transform.position;
-            falcon_init_picked_pos = GameObject.FindGameObjectWithTag("Cursor").transform.position;
-        } else
-        {
-            GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = true;
-        }
+    protected internal void pick() {
+        is_picked = true;
         
+        GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = false;
+        my_init_picked_pos = transform.position;
+        falcon_init_picked_pos = GameObject.FindGameObjectWithTag("Cursor").transform.position;
+    }
+
+    protected internal bool release()
+    {
+        if (transform.FindChild("Collider").GetComponent<AtomCollider>().getOverAtomGUICounter() == 0)
+        {
+            is_picked = false;
+            GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
