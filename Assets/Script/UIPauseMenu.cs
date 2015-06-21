@@ -56,4 +56,10 @@ public class UIPauseMenu : MonoBehaviour {
         print(" J'ai quitté!");
         Application.Quit();
     }
+
+	public void Unpause(){
+		IsPaused = false;
+		Time.timeScale = 1;
+		
+	}
 }
