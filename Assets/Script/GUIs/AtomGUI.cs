@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class AtomGUI : MonoBehaviour
 {
     bool is_cursor_over;
     bool atom_already_created;
+    Renderer rend;
 
     void Start()
     {
+        rend = transform.parent.GetComponent<Renderer>();
         is_cursor_over = false;
         atom_already_created = false;
     }
@@ -25,6 +28,8 @@ public class AtomGUI : MonoBehaviour
                 GameObject new_atom;
                 var atom_name = transform.parent.name;
 
+                setHalo(false);
+                rend.enabled = false;
 
                 switch (atom_name)
                 {
@@ -45,27 +50,35 @@ public class AtomGUI : MonoBehaviour
                         new_atom = AtomManager.instance.SpawnOxygen();
                         break;
                     default:
-                        break;
+                        throw new Exception("Atom name not recognized in switch");
                 }
-            }
-
-            if (buttons[2])
-            {
-                Destroy(transform.parent.gameObject);
             }
         }
     }
 
+    void setHalo(bool value)
+    {
+        ((Behaviour)transform.parent.GetComponent("Halo")).enabled = value;
+    }
+
     void OnTriggerEnter (Collider other)
     {
-        is_cursor_over = true;
-        ((Behaviour) transform.parent.GetComponent("Halo")).enabled = true;
+        if (other.tag == "Cursor")
+        {
+            is_cursor_over = true;
+            setHalo(true);
+        }
     }
 
     void OnTriggerExit (Collider other)
     {
-        is_cursor_over = false;
-        atom_already_created = false;
-        ((Behaviour)transform.parent.GetComponent("Halo")).enabled = false;
+        if (other.tag == "Cursor")
+        {
+            is_cursor_over = false;
+            atom_already_created = false;
+            setHalo(false);
+
+            rend.enabled = true;
+        }
     }
 }
