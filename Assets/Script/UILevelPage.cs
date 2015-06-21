@@ -11,5 +11,6 @@ public class UILevelPage : MonoBehaviour {
 	// Update is called once per frame
 	public void LoadLevel () {
         Application.LoadLevel("main");
+		print ("Chargement du lvl 1");
 	}
 }
