@@ -3345,3 +3345,59 @@
 [dhdComUSB::processData():20.42.17.5371] - G_A
 [dhdComUSB::tryCalibration():20.42.17.6178] - HomeDisabled, LED Blue
 [dhdComUSB::processData():20.42.17.7320] - G_A
+[dhdComUSB::dhdComUSB():21.10.33.7723] - Constructor
+[dhdComUSB::close():21.10.33.7724] - Closed
+[dhdOpenWithReset():21.10.33.7972] - currentDevice = 0, l_serNum = 16000156, is NOT smart
+[dhdOpenWithReset():21.10.33.8075] - l_serNum after getFileName = 16000156
+[dhdOpenWithReset():21.10.33.8076] - Found falcon_12_0101.bin at C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin
+[dhdOpenWithReset():21.10.33.8076] - comUSB[0]open(16000156, C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin, False)
+[dhdComUSB::open():21.10.33.8076] - Open(C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin, false)
+[dhdComUSB::open():21.10.33.8093] - OpenUSBPort succeeded after 1 tries
+[dhdComUSB::open():21.10.33.8093] - deviceType = 0
+[dhdComUSB::open():21.10.33.8094] - deviceID   = 67357512d
+[dhdComUSB::open():21.10.33.8094] - deviceSN   = 16000156
+[dhdComUSB::open():21.10.33.8094] - deviceDesc = FALCON HAPTIC
+[dhdComUSB::OpenDeviceCommunications():21.10.33.8096] - Set Baud Rate Status: 0
+[dhdComUSB::OpenDeviceCommunications():21.10.33.8388] - update() failed
+[dhdComUSB::OpenDeviceCommunications():21.10.33.8689] - update() okay after 2 updates
+[dhdComUSB::OpenDeviceCommunications():21.10.33.8690] - Returning 0
+[dhdComUSB::changeGrip():21.10.34.0690] - New Grip: G_A
+[dhdComUSB::changeGrip():21.10.34.0691] - Started grip change
+[changeGripThreadFunc::21.10.34.0692] - deleting old grip object
+[changeGripThreadFunc::21.10.34.0693] - Loading grip type G_A
+[changeGripThreadFunc::21.10.34.0702] - Loading delta
+[dhdDelta():21.10.34.0703] - Did not find FalconCommon.txt
+[changeGripThreadFunc::21.10.34.0703] - Done loading new grip
+[dhdComUSB::processData():21.10.34.0968] - G_A
+[dhdComUSB::tryCalibration():21.10.34.1779] - HomeDisabled, LED Blue
+[dhdComUSB::processData():21.10.34.2910] - G_A
+[dhdComUSB::processData():21.10.45.1906] - G_A
+[dhdComUSB::processData():21.10.45.6915] - G_A
+[dhdComUSB::dhdComUSB():21.10.58.9884] - Constructor
+[dhdComUSB::close():21.10.58.9885] - Closed
+[dhdOpenWithReset():21.10.59.0301] - currentDevice = 0, l_serNum = 16000156, is NOT smart
+[dhdOpenWithReset():21.10.59.0449] - l_serNum after getFileName = 16000156
+[dhdOpenWithReset():21.10.59.0452] - Found falcon_12_0101.bin at C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin
+[dhdOpenWithReset():21.10.59.0452] - comUSB[0]open(16000156, C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin, False)
+[dhdComUSB::open():21.10.59.0452] - Open(C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin, false)
+[dhdComUSB::open():21.10.59.0473] - OpenUSBPort succeeded after 1 tries
+[dhdComUSB::open():21.10.59.0474] - deviceType = 0
+[dhdComUSB::open():21.10.59.0474] - deviceID   = 67357512d
+[dhdComUSB::open():21.10.59.0474] - deviceSN   = 16000156
+[dhdComUSB::open():21.10.59.0474] - deviceDesc = FALCON HAPTIC
+[dhdComUSB::OpenDeviceCommunications():21.10.59.0475] - Set Baud Rate Status: 0
+[dhdComUSB::OpenDeviceCommunications():21.10.59.0771] - update() failed
+[dhdComUSB::OpenDeviceCommunications():21.10.59.1072] - update() okay after 2 updates
+[dhdComUSB::OpenDeviceCommunications():21.10.59.1073] - Returning 0
+[dhdComUSB::changeGrip():21.10.59.3073] - New Grip: G_A
+[dhdComUSB::changeGrip():21.10.59.3074] - Started grip change
+[changeGripThreadFunc::21.10.59.3076] - deleting old grip object
+[changeGripThreadFunc::21.10.59.3077] - Loading grip type G_A
+[changeGripThreadFunc::21.10.59.3096] - Loading delta
+[dhdDelta():21.10.59.3100] - Did not find FalconCommon.txt
+[changeGripThreadFunc::21.10.59.3100] - Done loading new grip
+[dhdComUSB::processData():21.10.59.3352] - G_A
+[dhdComUSB::tryCalibration():21.10.59.4160] - HomeDisabled, LED Blue
+[dhdComUSB::processData():21.10.59.5303] - G_A
+[dhdComUSB::dhdComUSB():21.11.40.6672] - Constructor
+[dhdComUSB::close():21.11.40.6673] - Closed
