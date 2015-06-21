@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Atom : MonoBehaviour {
 
+    bool is_cursor_over;
+
     string name;
     int valence;
     Renderer rend;
@@ -10,7 +12,7 @@ public class Atom : MonoBehaviour {
     bool is_picked;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         rend = GetComponent<Renderer>();
         is_picked = true;
 	}
@@ -20,11 +22,21 @@ public class Atom : MonoBehaviour {
 	    
 	}
 
-    void Set(string name, float scale, Material material, int valence)
+    public void Set(string name, float scale, Material material, int valence)
     {
         this.name = name;
         this.transform.localScale = new Vector3(scale, scale, scale);
         this.rend.material = material;
         this.valence = valence;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        is_cursor_over = true;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        is_cursor_over = false;
     }
 }
