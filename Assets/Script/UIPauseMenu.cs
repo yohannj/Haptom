@@ -37,4 +37,23 @@ public class UIPauseMenu : MonoBehaviour {
 			IsPaused = false;
 		}
 	}
+
+    public void LoadLevel()
+    {
+        print("Chargement du lvl 1");
+        Application.LoadLevel("main");
+        IsPaused = false;
+    }
+
+    public void LoadLevelPage()
+    {
+        Application.LoadLevel("LevelPage");
+    }
+
+    //Quit Game
+    public void QuitGame()
+    {
+        print(" J'ai quitté!");
+        Application.Quit();
+    }
 }
