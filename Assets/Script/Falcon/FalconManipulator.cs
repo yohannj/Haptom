@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class FalconManipulator : MonoBehaviour {
 
@@ -22,6 +23,8 @@ public class FalconManipulator : MonoBehaviour {
 	
 	private bool haveReceivedTipPosition = false;
 	private int receivedCount = 0;
+
+    private bool is_picking = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -151,5 +154,20 @@ public class FalconManipulator : MonoBehaviour {
 			break;
 			
 		}
-	}	
+	}
+
+    public bool tryPick()
+    {
+        if (is_picking) return false;
+
+        is_picking = true;
+        return true;
+    }
+
+    public void release()
+    {
+        if (!is_picking) throw new Exception("Try to release but was not picking");
+
+        is_picking = false;
+    }
 }

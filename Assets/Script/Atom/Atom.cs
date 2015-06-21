@@ -3,40 +3,62 @@ using System.Collections;
 
 public class Atom : MonoBehaviour {
 
-    bool is_cursor_over;
-
-    string name;
     int valence;
     Renderer rend;
 
-    bool is_picked;
+    bool is_picked = false;
+    Vector3 my_init_picked_pos;
+    Vector3 falcon_init_picked_pos;
 
-	// Use this for initialization
 	void Awake () {
         rend = GetComponent<Renderer>();
-        is_picked = true;
+        var cursor_position = GameObject.FindGameObjectWithTag("Cursor").transform.position;
+        transform.position = new Vector3(cursor_position.x, cursor_position.y, 2.5f);
+
+        pick();
+
+        var own_collider = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        own_collider.transform.parent = transform;
+        own_collider.transform.position = transform.position;
+        own_collider.AddComponent<AtomCollider>();
+        own_collider.name = "Collider";
 	}
 	
-	// Update is called once per frame
 	void Update () {
-	    
+        if (is_picked)
+        {
+            Vector3 diff_pos_falcon = GameObject.FindGameObjectWithTag("Cursor").transform.position - falcon_init_picked_pos;
+            transform.position = my_init_picked_pos + diff_pos_falcon;
+        }
 	}
 
     public void Set(string name, float scale, Material material, int valence)
     {
-        this.name = name;
+        this.transform.name = name;
         this.transform.localScale = new Vector3(scale, scale, scale);
         this.rend.material = material;
         this.valence = valence;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        is_cursor_over = true;
+    protected internal void pick() {
+        is_picked = true;
+        
+        GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = false;
+        my_init_picked_pos = transform.position;
+        falcon_init_picked_pos = GameObject.FindGameObjectWithTag("Cursor").transform.position;
     }
 
-    void OnTriggerExit(Collider other)
+    protected internal bool release()
     {
-        is_cursor_over = false;
+        if (transform.FindChild("Collider").GetComponent<AtomCollider>().getOverAtomGUICounter() == 0)
+        {
+            is_picked = false;
+            GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

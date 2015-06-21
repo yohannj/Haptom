@@ -12,6 +12,7 @@ public class UIMenuManager : MonoBehaviour {
 	//Quit Game
     public void QuitGame ()
     {
+		print (" J'ai quitté!");
         Application.Quit();
 	}
 }
