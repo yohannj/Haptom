@@ -4,7 +4,7 @@ using System.Collections;
 public class AtomCollider : MonoBehaviour {
 
     bool is_cursor_over;
-    bool picked_button_pushed;
+    int state = 1;
 
     int over_AtomGUI_counter = 0;
 
@@ -21,7 +21,7 @@ public class AtomCollider : MonoBehaviour {
         GetComponent<Rigidbody>().useGravity = false;
 
         is_cursor_over = true;
-        picked_button_pushed = true;
+        //picked_button_pushed = true;
     }
 	
 	void Update () {
@@ -29,26 +29,64 @@ public class AtomCollider : MonoBehaviour {
         {
             bool[] buttons;
             FalconUnity.getFalconButtonStates(0, out buttons);
-
-            if (buttons[0] && !picked_button_pushed)
+            switch (state)
             {
-                picked_button_pushed = GameObject.Find("Falcon").GetComponent<FalconManipulator>().tryPick();
+                case 0:
+                    if (buttons[0]) //Push button and create an atom
+                    {
+                        bool pick_done = GameObject.Find("Falcon").GetComponent<FalconManipulator>().tryPick();
+                        if (pick_done)
+                        {
+                            transform.parent.GetComponent<Atom>().pick();
+                            state = 1;
+                        }
+                    }
+                    break;
+                case 1:
+                    if (!buttons[0]) state = 2; //Release button
+                    break;
+                case 2:
+                    if (buttons[0]) state = 3; //Push button: will of releasing the atom
+                    break;
+                case 3:
+                    if (!buttons[0])
+                    {
+                        bool release_done = transform.parent.GetComponent<Atom>().release();
+                        if (release_done)
+                        {
+                            GameObject.Find("Falcon").GetComponent<FalconManipulator>().release();
+                            state = 0;
+                        }
+                        else
+                        {
+                            state = 2;
+                        }
+                    }
+                    break;
+            }
+            
+            /*if (buttons[0] && !picked_button_pushed)
+            {
+                picked_button_pushed = true;
 
-                if(picked_button_pushed) transform.parent.GetComponent<Atom>().pick();
+                bool pick_done = GameObject.Find("Falcon").GetComponent<FalconManipulator>().tryPick();
+                if (pick_done) transform.parent.GetComponent<Atom>().pick();
             }
             else if (!buttons[0] && picked_button_pushed)
             {
-                bool release_done = transform.parent.GetComponent<Atom>().release();
+                picked_button_pushed = false;
 
+                bool release_done = transform.parent.GetComponent<Atom>().release();
                 if (release_done)
                 {
-                    picked_button_pushed = false;
                     GameObject.Find("Falcon").GetComponent<FalconManipulator>().release();
                 }
-            }
+            }*/
 
             if (buttons[2])
             {
+                state = 0;
+                //TODO release if needed
                 Destroy(transform.parent.gameObject);
             }
         }
