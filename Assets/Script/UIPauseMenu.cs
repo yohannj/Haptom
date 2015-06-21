@@ -30,7 +30,6 @@ public class UIPauseMenu : MonoBehaviour {
 	}
 
 	public void Continue(){
-		Debug.Log("ispaused :" + IsPaused);
 		if (IsPaused)
 		{
 			Time.timeScale = 1;

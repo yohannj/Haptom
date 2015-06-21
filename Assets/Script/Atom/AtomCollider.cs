@@ -38,7 +38,6 @@ public class AtomCollider : MonoBehaviour {
     {
         if (other.tag == "Cursor")
         {
-            Debug.Log(other.transform.name + " is in");
             is_cursor_over = true;
         }
     }
@@ -48,7 +47,6 @@ public class AtomCollider : MonoBehaviour {
 
         if (other.tag == "Cursor")
         {
-            Debug.Log(other.transform.name + " is out");
             is_cursor_over = false;
         }
     }
