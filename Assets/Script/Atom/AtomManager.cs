@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AtomManager : MonoBehaviour {
+public class AtomManager : MonoBehaviour
+{
 
     private static AtomManager _instance;
 
@@ -20,19 +21,22 @@ public class AtomManager : MonoBehaviour {
 
     private int index = -1;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     private GameObject SpawnAtom(string name, float scale, Material material, int valence)
     {
         var new_atom_obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        new_atom_obj.transform.parent = transform;
         var new_atom = new_atom_obj.AddComponent<Atom>();
         new_atom.Set(name + "_" + (++index), scale, material, valence);
 

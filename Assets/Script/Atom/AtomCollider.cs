@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class AtomCollider : MonoBehaviour {
+public class AtomCollider : MonoBehaviour
+{
+
+    HashSet<GameObject> neighbours;
 
     bool is_cursor_over;
     int state = 1;
@@ -10,28 +14,34 @@ public class AtomCollider : MonoBehaviour {
 
     void Awake()
     {
+        neighbours = new HashSet<GameObject>();
         GetComponent<Renderer>().enabled = false;
         transform.Rotate(90, 0, 0);
 
         GetComponent<Collider>().isTrigger = true;
         GetComponent<CapsuleCollider>().height = 40;
-        
+
 
         gameObject.AddComponent<Rigidbody>();
         GetComponent<Rigidbody>().useGravity = false;
 
         is_cursor_over = true;
     }
-	
-	void Update () {
+
+    void Update()
+    {
         if (is_cursor_over)
         {
             bool[] buttons;
             FalconUnity.getFalconButtonStates(0, out buttons);
+
+            bool pushing = buttons[0];
+            bool deleting = buttons[2];
+
             switch (state)
             {
                 case 0:
-                    if (buttons[0]) //Push button and create an atom
+                    if (pushing) //Push button and create an atom
                     {
                         bool pick_done = GameObject.Find("Falcon").GetComponent<FalconManipulator>().tryPick();
                         if (pick_done)
@@ -42,13 +52,13 @@ public class AtomCollider : MonoBehaviour {
                     }
                     break;
                 case 1:
-                    if (!buttons[0]) state = 2; //Release button
+                    if (!pushing) state = 2; //Release button
                     break;
                 case 2:
-                    if (buttons[0]) state = 3; //Push button: will of releasing the atom
+                    if (pushing) state = 3; //Push button: will of releasing the atom
                     break;
                 case 3:
-                    if (!buttons[0])
+                    if (!pushing) //Try to release the atom
                     {
                         bool release_done = transform.parent.GetComponent<Atom>().release();
                         if (release_done)
@@ -64,7 +74,7 @@ public class AtomCollider : MonoBehaviour {
                     break;
             }
 
-            if (buttons[2] && !buttons[0])
+            if (deleting && !pushing)
             {
                 if (state != 0)
                 {
@@ -74,17 +84,21 @@ public class AtomCollider : MonoBehaviour {
                 Destroy(transform.parent.gameObject);
             }
         }
-	}
-
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Cursor")
         {
             is_cursor_over = true;
-        } else if (other.GetComponent<AtomGUI>() != null)
+        }
+        else if (other.GetComponent<AtomGUI>() != null)
         {
             ++over_AtomGUI_counter;
+        }
+        else if (other.GetComponent<AtomCollider>() != null)
+        {
+            neighbours.Add(other.gameObject);
         }
     }
 
@@ -94,14 +108,20 @@ public class AtomCollider : MonoBehaviour {
         if (other.tag == "Cursor")
         {
             is_cursor_over = false;
-        } else if (other.GetComponent<AtomGUI>() != null)
+        }
+        else if (other.GetComponent<AtomGUI>() != null)
         {
             --over_AtomGUI_counter;
+        }
+        else if (other.GetComponent<AtomCollider>() != null)
+        {
+            neighbours.Remove(other.gameObject);
         }
     }
 
 
-    public int getOverAtomGUICounter() {
+    public int getOverAtomGUICounter()
+    {
         return over_AtomGUI_counter;
     }
 }
