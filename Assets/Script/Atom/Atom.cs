@@ -7,6 +7,7 @@ public class Atom : MonoBehaviour
 
     int valence;
     float scale;
+    float mass;
     Renderer rend;
 
     bool is_picked = false;
@@ -34,15 +35,18 @@ public class Atom : MonoBehaviour
         {
             Vector3 diff_pos_falcon = GameObject.FindGameObjectWithTag("Cursor").transform.position - falcon_init_picked_pos;
             transform.position = my_init_picked_pos + diff_pos_falcon;
+
+            //Add force when the user picked an atom
+            FalconUnity.applyForce(0, new Vector3(0, -(1 + mass / 8)), 0.2f);
         }
     }
 
-    public void Set(string name, float scale, Material material, int valence)
+    public void Set(string name, float scale, float mass, Material material, int valence)
     {
-        float size = (float) (0.5 * Math.Sqrt(valence));
+        float size = (float)(0.5 * Math.Sqrt(valence));
         this.transform.name = name;
         this.scale = scale;
-
+        this.mass = mass;
         this.transform.localScale = new Vector3(size, size, size);
         this.rend.material = material;
         this.valence = valence;
