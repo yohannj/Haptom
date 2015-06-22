@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Atom : MonoBehaviour
 {
 
     int valence;
+    float scale;
     Renderer rend;
 
     bool is_picked = false;
@@ -37,8 +39,11 @@ public class Atom : MonoBehaviour
 
     public void Set(string name, float scale, Material material, int valence)
     {
+        float size = (float) (0.5 * Math.Sqrt(valence));
         this.transform.name = name;
-        this.transform.localScale = new Vector3(scale, scale, scale);
+        this.scale = scale;
+
+        this.transform.localScale = new Vector3(size, size, size);
         this.rend.material = material;
         this.valence = valence;
     }
