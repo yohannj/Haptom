@@ -5,13 +5,20 @@ public class UIPauseMenu : MonoBehaviour
 {
 
     private bool IsPaused = false;
-    Canvas canvas;
+    public GameObject panel;
+    public CanvasGroup _canvasGroup;
+    //Canvas canvas;
 
     // Use this for initialization
     void Start()
     {
-        canvas = GetComponent<Canvas>();
-        canvas.enabled = false;
+        //canvas = GetComponent<Canvas>();
+        //canvas.enabled = false;
+
+        panel = GameObject.FindGameObjectWithTag("MenuPause");
+        panel.gameObject.SetActive(false);
+
+        _canvasGroup.alpha = 0;
     }
 
     // Update is called once per frame
@@ -20,13 +27,17 @@ public class UIPauseMenu : MonoBehaviour
         if ((Input.GetKeyDown("p") || Input.GetKeyDown(KeyCode.Escape)) && !IsPaused)
         {
             Time.timeScale = 0;
-            canvas.enabled = true;
+            panel.gameObject.SetActive(true);
+            _canvasGroup.alpha = 1;
+            //canvas.enabled = true;
             IsPaused = true;
         }
         else if ((Input.GetKeyDown("p") || Input.GetKeyDown(KeyCode.Escape)) && IsPaused)
         {
             Time.timeScale = 1;
-            canvas.enabled = false;
+            panel.gameObject.SetActive(false);
+            _canvasGroup.alpha = 0;
+            //canvas.enabled = false;
             IsPaused = false;
         }
 
@@ -37,7 +48,9 @@ public class UIPauseMenu : MonoBehaviour
         if (IsPaused)
         {
             Time.timeScale = 1;
-            canvas.enabled = false;
+            panel.gameObject.SetActive(false);
+            _canvasGroup.alpha = 0;
+            //canvas.enabled = false;
             IsPaused = false;
         }
     }
