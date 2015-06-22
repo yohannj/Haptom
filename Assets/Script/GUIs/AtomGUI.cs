@@ -15,7 +15,7 @@ public class AtomGUI : MonoBehaviour
         atom_already_created = false;
     }
 
-    void Update ()
+    void Update()
     {
         if (is_cursor_over && !atom_already_created)
         {
@@ -66,16 +66,17 @@ public class AtomGUI : MonoBehaviour
         ((Behaviour)transform.parent.GetComponent("Halo")).enabled = value;
     }
 
-    void OnTriggerEnter (Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Cursor")
         {
             is_cursor_over = true;
             setHalo(true);
+            AudioManager.instance.playMouseOverFalseGUI();
         }
     }
 
-    void OnTriggerExit (Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.tag == "Cursor")
         {

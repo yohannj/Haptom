@@ -1,0 +1,8 @@
+Concept :
+Aller à l'intérieur d'un atome pour prendre/enlever/rajouter des particules
+
+Haptique :
+Poids des atomes
+
+Bug :
+Timer -> 3:60 visible

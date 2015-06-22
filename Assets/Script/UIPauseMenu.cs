@@ -1,42 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UIPauseMenu : MonoBehaviour {
-	
-	private bool IsPaused = false;
-	Canvas canvas;
+public class UIPauseMenu : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		canvas = GetComponent<Canvas>();
-		canvas.enabled = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if((Input.GetKeyDown("p")||Input.GetKeyDown(KeyCode.Escape)) && !IsPaused)
-		{
-			Time.timeScale = 0;
-			canvas.enabled = true;
-			IsPaused = true;
-		}
-		else if ((Input.GetKeyDown("p")||Input.GetKeyDown(KeyCode.Escape))&& IsPaused)
-		{
-			Time.timeScale = 1;
-			canvas.enabled = false;
-			IsPaused = false;
-		}
-		
-	}
+    private bool IsPaused = false;
+    Canvas canvas;
 
-	public void Continue(){
-		if (IsPaused)
-		{
-			Time.timeScale = 1;
-			canvas.enabled = false;
-			IsPaused = false;
-		}
-	}
+    // Use this for initialization
+    void Start()
+    {
+        canvas = GetComponent<Canvas>();
+        canvas.enabled = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if ((Input.GetKeyDown("p") || Input.GetKeyDown(KeyCode.Escape)) && !IsPaused)
+        {
+            Time.timeScale = 0;
+            canvas.enabled = true;
+            IsPaused = true;
+        }
+        else if ((Input.GetKeyDown("p") || Input.GetKeyDown(KeyCode.Escape)) && IsPaused)
+        {
+            Time.timeScale = 1;
+            canvas.enabled = false;
+            IsPaused = false;
+        }
+
+    }
+
+    public void Continue()
+    {
+        if (IsPaused)
+        {
+            Time.timeScale = 1;
+            canvas.enabled = false;
+            IsPaused = false;
+        }
+    }
 
     public void LoadLevel()
     {
@@ -57,9 +61,10 @@ public class UIPauseMenu : MonoBehaviour {
         Application.Quit();
     }
 
-	public void Unpause(){
-		IsPaused = false;
-		Time.timeScale = 1;
-		
-	}
+    public void Unpause()
+    {
+        IsPaused = false;
+        Time.timeScale = 1;
+
+    }
 }
