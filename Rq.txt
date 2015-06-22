@@ -1,5 +1,6 @@
 Concept :
 Aller à l'intérieur d'un atome pour prendre/enlever/rajouter des particules
+Plusieurs types de molécules à l'écran, il faut dire laquelle est l'eau, sodium, etc. dans l'ordre indiqué
 
 Haptique :
 Poids des atomes

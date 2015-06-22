@@ -121,6 +121,10 @@ public class AtomCollider : MonoBehaviour
         }
     }
 
+    public string getName()
+    {
+        return transform.parent.name;
+    }
 
     public int getOverAtomGUICounter()
     {
@@ -137,10 +141,10 @@ public class AtomCollider : MonoBehaviour
 
         foreach (GameObject neighbour in neighbours)
         {
-            valence += neighbour.transform.parent.GetComponent<Atom>().getValence();
+            valence -= neighbour.transform.parent.GetComponent<Atom>().getValence();
         }
 
-        if ((transform.parent.name == "Hydrogen" || transform.parent.name == "Helium") && valence == 2 || valence == 8)
+        if (valence <= 0)
         {
             return true;
         }

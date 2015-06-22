@@ -72,7 +72,7 @@ public class AtomManager : MonoBehaviour
         }
 
         //DEBUG PURPOSE
-        Debug.Log("#######################");
+        /*Debug.Log("#######################");
         for (int i = 0; i < atoms_of_group.Count; ++i)
         {
             String msg = "Group " + i + " contains:";
@@ -82,8 +82,7 @@ public class AtomManager : MonoBehaviour
             }
 
             Debug.Log(msg);
-        }
-
+        }*/
     }
 
     public void UpdateAtomGroupWithPicked(GameObject go)
@@ -104,17 +103,40 @@ public class AtomManager : MonoBehaviour
             level = 1;
         }
 
+        List<string> atom_needed = new List<string>();
+        switch (level)
+        {
+            case 1:
+                atom_needed = new List<String> { "Hydrogen", "Hydrogen", "Oxygen" };
+                break;
+        }
+
+        atom_needed.Sort();
 
         bool success;
         for (int i = 0; i < atoms_of_group.Count; ++i)
         {
-            success = true;
-            foreach (GameObject atom in atoms_of_group[i])
-            {
-                success &= atom.GetComponent<AtomCollider>().isValenceOK();
-            }
 
-            if (success) return true;
+            if (atoms_of_group[i].Count == atom_needed.Count)
+            {
+                success = true;
+                List<string> atoms_names = new List<string>();
+
+                foreach (GameObject atom in atoms_of_group[i])
+                {
+                    success &= atom.GetComponent<AtomCollider>().isValenceOK();
+                    atoms_names.Add(atom.GetComponent<AtomCollider>().getName());
+                }
+
+                atoms_names.Sort();
+
+                for (int j = 0; j < atom_needed.Count; ++j)
+                {
+                    success &= atom_needed[j] == atoms_names[j];
+                }
+
+                    if (success) return true;
+            }
         }
 
         return false;
