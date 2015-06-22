@@ -23,11 +23,13 @@ public class AtomManager : MonoBehaviour
 
     IDictionary<GameObject, int> group_of_atom;
     IDictionary<int, HashSet<GameObject>> atoms_of_group;
+    IDictionary<int, float> completion_of_group;
 
     // Use this for initialization
     void Awake()
     {
         group_of_atom = new Dictionary<GameObject, int>();
+        atoms_of_group = new Dictionary<int, HashSet<GameObject>>();
     }
 
 
@@ -89,6 +91,14 @@ public class AtomManager : MonoBehaviour
     {
         UpdateAtomGroup();
         atoms_of_group[group_of_atom[go]].Remove(go);
+    }
+
+    public void computeGroupCompletions()
+    {
+        completion_of_group = new Dictionary<int, float>();
+        foreach(int i in atoms_of_group.Keys) {
+
+        }
     }
 
     public bool isVictoryConditionValid()
