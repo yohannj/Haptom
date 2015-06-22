@@ -131,4 +131,20 @@ public class AtomCollider : MonoBehaviour
     {
         return new HashSet<GameObject>(neighbours);
     }
+
+    public bool isValenceOK() {
+        int valence = transform.parent.GetComponent<Atom>().getValence();
+
+        foreach (GameObject neighbour in neighbours)
+        {
+            valence += neighbour.transform.parent.GetComponent<Atom>().getValence();
+        }
+
+        if ((transform.parent.name == "Hydrogen" || transform.parent.name == "Helium") && valence == 2 || valence == 8)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

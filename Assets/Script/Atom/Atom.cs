@@ -65,4 +65,9 @@ public class Atom : MonoBehaviour
             return false;
         }
     }
+
+    public int getValence()
+    {
+        return valence;
+    }
 }
