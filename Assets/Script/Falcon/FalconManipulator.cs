@@ -38,12 +38,12 @@ public class FalconManipulator : MonoBehaviour {
 		tipPositionScale *= hapticTipToWorldScale;
 		
 		FalconUnity.updateHapticTransform(falcon_num, transform.position, transform.rotation, tipPositionScale, useMotionCompensator, 1/60.0f);
-			
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 		if (! haveReceivedTipPosition ) {
 			Vector3 posTip2;
 			bool result = FalconUnity.getTipPosition(falcon_num, out posTip2);

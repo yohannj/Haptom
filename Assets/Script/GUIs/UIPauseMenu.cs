@@ -80,4 +80,9 @@ public class UIPauseMenu : MonoBehaviour
         Time.timeScale = 1;
 
     }
+
+    public void setIsPausedBool(bool value)
+    {
+        IsPaused = value;
+    }
 }
