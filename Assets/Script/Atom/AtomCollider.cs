@@ -83,6 +83,7 @@ public class AtomCollider : MonoBehaviour
                     GameObject.Find("Falcon").GetComponent<FalconManipulator>().release();
                     GameObject.FindGameObjectWithTag("CursorRenderer").GetComponent<Renderer>().enabled = true;
                 }
+                AtomManager.instance.DestroyedAtom(gameObject);
                 Destroy(transform.parent.gameObject);
             }
         }

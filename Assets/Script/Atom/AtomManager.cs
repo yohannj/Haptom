@@ -88,7 +88,7 @@ public class AtomManager : MonoBehaviour
     public void UpdateAtomGroupWithPicked(GameObject go)
     {
         UpdateAtomGroup();
-        group_of_atom[go] = -1;
+        atoms_of_group[group_of_atom[go]].Remove(go);
     }
 
     public bool isVictoryConditionValid()
@@ -177,6 +177,11 @@ public class AtomManager : MonoBehaviour
     public GameObject SpawnOxygen()
     {
         return SpawnAtom("Oxygen", 0.18f, Resources.Load("Materials/Oxygen", typeof(Material)) as Material, 2);
+    }
+
+    public void DestroyedAtom(GameObject go)
+    {
+        group_of_atom.Remove(go);
     }
 
 }
