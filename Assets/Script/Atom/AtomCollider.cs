@@ -48,6 +48,7 @@ public class AtomCollider : MonoBehaviour
                         {
                             transform.parent.GetComponent<Atom>().pick();
                             state = 1;
+                            AtomManager.instance.UpdateAtomGroupWithPicked(gameObject);
                         }
                     }
                     break;
@@ -65,6 +66,7 @@ public class AtomCollider : MonoBehaviour
                         {
                             GameObject.Find("Falcon").GetComponent<FalconManipulator>().release();
                             state = 0;
+                            AtomManager.instance.UpdateAtomGroup();
                         }
                         else
                         {
@@ -123,5 +125,10 @@ public class AtomCollider : MonoBehaviour
     public int getOverAtomGUICounter()
     {
         return over_AtomGUI_counter;
+    }
+
+    public HashSet<GameObject> getNeighbours()
+    {
+        return new HashSet<GameObject>(neighbours);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AtomManager : MonoBehaviour
 {
@@ -19,18 +20,62 @@ public class AtomManager : MonoBehaviour
         }
     }
 
-    private int index = -1;
+    IDictionary<GameObject, int> group_of_atom;
+
+    private int atom_name_index = -1;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+        group_of_atom = new Dictionary<GameObject, int>();
+    }
+
+
+    public void UpdateAtomGroup()
+    {
+        int index = 0;
+        HashSet<GameObject> to_update = new HashSet<GameObject>(group_of_atom.Keys);
+        List<GameObject> atom_iterator = new List<GameObject>(group_of_atom.Keys);
+
+            foreach (GameObject atom in atom_iterator)
+            {
+                if (to_update.Contains(atom))
+                {
+                    Queue<GameObject> to_add = new Queue<GameObject>();
+                    to_add.Enqueue(atom);
+                    to_update.Remove(atom);
+
+                    while (to_add.Count > 0)
+                    {
+                        GameObject tmp_atom = to_add.Dequeue();
+                        group_of_atom[tmp_atom] = index;
+
+                        foreach (GameObject neighbour in tmp_atom.GetComponent<AtomCollider>().getNeighbours())
+                        {
+                            if (to_update.Contains(neighbour))
+                            {
+                                to_add.Enqueue(neighbour);
+                                to_update.Remove(neighbour);
+                            }
+                        }
+                    }
+
+                    ++index;
+                }
+            }
+
+        //DEBUG PURPOSE
+        foreach (GameObject go in group_of_atom.Keys)
+        {
+            Debug.Log(go.transform.parent.name + " in group " + group_of_atom[go]);
+        }
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateAtomGroupWithPicked(GameObject go)
     {
-
+        UpdateAtomGroup();
+        group_of_atom[go] = -1;
     }
 
     private GameObject SpawnAtom(string name, float scale, Material material, int valence)
@@ -38,7 +83,9 @@ public class AtomManager : MonoBehaviour
         var new_atom_obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         new_atom_obj.transform.parent = transform;
         var new_atom = new_atom_obj.AddComponent<Atom>();
-        new_atom.Set(name + "_" + (++index), scale, material, valence);
+        new_atom.Set(name + "_" + (++atom_name_index), scale, material, valence);
+
+        group_of_atom.Add(new_atom_obj.transform.GetChild(0).gameObject, -1);
 
         return new_atom_obj;
     }
