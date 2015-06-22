@@ -19,7 +19,7 @@ public class CanvasManager : MonoBehaviour {
 
         panelSuccess = GameObject.FindGameObjectWithTag("PanelSuccess");
         panelSuccess.gameObject.SetActive(false);
-        panelFail = GameObject.FindGameObjectWithTag("panelFail");
+        panelFail = GameObject.FindGameObjectWithTag("PanelFail");
         panelFail.gameObject.SetActive(false);
 
         _canvasGroupSuccess.alpha = 0;
@@ -42,35 +42,16 @@ public class CanvasManager : MonoBehaviour {
     public void ValiderMolecule()
     {
         bool result = AtomManager.instance.isVictoryConditionValid();
-        
+        Debug.Log(result);
+
         if (result)
         {
-            GetComponent<UIPauseMenu>().setIsPausedBool(true);
-            TimeValueSuccess.text = TimeValue.text;
 
-            bool hintUsedValue = GetComponent<HintManager>().getUsedHint();
-
-            if (hintUsedValue)
-            {
-                HintValueSuccess.text = "Used";
-            }
-            else
-            {
-                HintValueSuccess.text = "Unused";
-            }
-
-            panelSuccess.gameObject.SetActive(true);
-            _canvasGroupSuccess.alpha = 1;
+            ShowSuccess();
         }
         else if (!result)
         {
-            panelFail.gameObject.SetActive(true);
-            _canvasGroupFail.alpha = 1;
-
-            StartCoroutine(Coroutine());
-
-            panelFail.gameObject.SetActive(false);
-            _canvasGroupFail.alpha = 0;
+            ShowFail();
 
         }
         else
@@ -80,8 +61,40 @@ public class CanvasManager : MonoBehaviour {
         
     }
 
-    IEnumerator Coroutine()
+    void ShowSuccess()
     {
-        yield return new WaitForSeconds(10);
+        GetComponent<UIPauseMenu>().setIsPausedBool(true);
+        TimeValueSuccess.text = TimeValue.text;
+
+        bool hintUsedValue = GetComponent<HintManager>().getUsedHint();
+
+        if (hintUsedValue)
+        {
+            HintValueSuccess.text = "Used";
+        }
+        else
+        {
+            HintValueSuccess.text = "Unused";
+        }
+
+        panelSuccess.gameObject.SetActive(true);
+        _canvasGroupSuccess.alpha = 1;
+    }
+
+    void ShowFail()
+    {
+
+        panelFail.gameObject.SetActive(true);
+        _canvasGroupFail.alpha = 1;
+
+        Invoke("HideFail", 3);
+
+        
+    }
+
+    void HideFail()
+    {
+        panelFail.gameObject.SetActive(false);
+        _canvasGroupFail.alpha = 0;
     }
 }
