@@ -5,6 +5,13 @@ public class HintManager : MonoBehaviour {
 
     public Hint CurrentHint;
 
+    public bool hintUsed;
+
+    void Start()
+    {
+        hintUsed = false;
+    }
+
     // Use this for initialization
   /*  public void Update()
     {
@@ -17,6 +24,7 @@ public class HintManager : MonoBehaviour {
     public void clickShowHint()
     {
         ShowHint(CurrentHint);
+        hintUsed = true;
     }
 
     public void ShowHint(Hint hint)
@@ -27,5 +35,10 @@ public class HintManager : MonoBehaviour {
             CurrentHint = hint;
             CurrentHint.IsOpen = true;
 
+    }
+
+    public bool getUsedHint()
+    {
+        return hintUsed;
     }
 }
