@@ -33,23 +33,15 @@ public class AtomManager : MonoBehaviour
         group_of_atom = new Dictionary<GameObject, int>();
         atoms_of_group = new Dictionary<int, HashSet<GameObject>>();
 
-        int level;
         try
         {
-            level = GameProperties.instance.getLevel();
+            atoms_needed = GameProperties.instance.getMoleculeAtoms();
         }
         catch
         {
-            level = 1;
+            atoms_needed = new List<String> { "Hydrogen", "Hydrogen", "Oxygen" };
         }
 
-        atoms_needed = new List<string>();
-        switch (level)
-        {
-            case 1:
-                atoms_needed = new List<String> { "Hydrogen", "Hydrogen", "Oxygen" };
-                break;
-        }
 
         atoms_needed.Sort();
     }

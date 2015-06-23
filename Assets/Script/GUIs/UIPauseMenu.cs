@@ -45,6 +45,7 @@ public class UIPauseMenu : MonoBehaviour
 
     public void Continue()
     {
+		AudioManager.instance.playClicMenu();
         if (IsPaused)
         {
             Time.timeScale = 1;
@@ -57,6 +58,7 @@ public class UIPauseMenu : MonoBehaviour
 
     public void LoadLevel()
     {
+		AudioManager.instance.playClicMenu();
         print("Chargement du lvl 1");
         Application.LoadLevel("main");
         IsPaused = false;
@@ -64,12 +66,14 @@ public class UIPauseMenu : MonoBehaviour
 
     public void LoadLevelPage()
     {
+		AudioManager.instance.playClicMenu();
         Application.LoadLevel("LevelPage");
     }
 
     //Quit Game
     public void QuitGame()
     {
+		AudioManager.instance.playClicMenu();
         print(" J'ai quitté!");
         Application.Quit();
     }

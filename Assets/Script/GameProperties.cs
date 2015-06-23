@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 
 public class GameProperties : MonoBehaviour {
@@ -37,6 +38,13 @@ public class GameProperties : MonoBehaviour {
     int LevelId;
     HashSet<int> listLevelSucceed = new HashSet<int>();
 
+    string molecule_name;
+    string molecule_hint;
+    List<string> molecule_atoms;
+    string explications;
+    string mass_molar;
+    string density;
+
     public void AddLevelSucceeded()
     {
         listLevelSucceed.Add(LevelId);
@@ -51,6 +59,16 @@ public class GameProperties : MonoBehaviour {
 
     public void setLevel(int i)
     {
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "\\ressources\\haptom.tsv");
+        Debug.Log(path);
+        string[] lines = File.ReadAllLines(path);
+        string[] data = lines[i].Split('\t');
+        molecule_name = data[0];
+        molecule_hint = data[1];
+        molecule_atoms = new List<string>(data[2].Split('-'));
+        explications = data[3];
+        mass_molar = data[4];
+        density = data[5];
         LevelId = i;
     }
 
@@ -58,4 +76,35 @@ public class GameProperties : MonoBehaviour {
     {
         return LevelId;
     }
+
+    public string getMoleculeName()
+    {
+        return molecule_name;
+    }
+
+    public string getMoleculeHint()
+    {
+        return molecule_hint;
+    }
+
+    public List<string> getMoleculeAtoms()
+    {
+        return molecule_atoms;
+    }
+
+    public string getExplications()
+    {
+        return explications;
+    }
+
+    public string getMassMolar()
+    {
+        return mass_molar;
+    }
+
+    public string getDensity()
+    {
+        return density;
+    }
+
 }

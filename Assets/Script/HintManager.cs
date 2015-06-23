@@ -24,6 +24,7 @@ public class HintManager : MonoBehaviour {
     public void clickShowHint()
     {
         ShowHint(CurrentHint);
+		AudioManager.instance.playClicMenu();
         hintUsed = true;
     }
 
