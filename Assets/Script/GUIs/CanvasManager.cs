@@ -42,7 +42,6 @@ public class CanvasManager : MonoBehaviour {
     public void ValiderMolecule()
     {
         bool result = AtomManager.instance.isVictoryConditionValid();
-        Debug.Log(result);
 
         if (result)
         {
@@ -63,7 +62,7 @@ public class CanvasManager : MonoBehaviour {
 
     void ShowSuccess()
     {
-        GetComponent<UIPauseMenu>().setIsPausedBool(true);
+        isPaused = true;
         TimeValueSuccess.text = TimeValue.text;
 
         bool hintUsedValue = GetComponent<HintManager>().getUsedHint();

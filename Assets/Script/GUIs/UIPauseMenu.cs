@@ -4,7 +4,7 @@ using System.Collections;
 public class UIPauseMenu : MonoBehaviour
 {
 
-    private bool IsPaused = false;
+    public bool IsPaused = false;
     public GameObject panel;
     public CanvasGroup _canvasGroup;
     //Canvas canvas;
@@ -79,10 +79,5 @@ public class UIPauseMenu : MonoBehaviour
         IsPaused = false;
         Time.timeScale = 1;
 
-    }
-
-    public void setIsPausedBool(bool value)
-    {
-        IsPaused = value;
     }
 }
