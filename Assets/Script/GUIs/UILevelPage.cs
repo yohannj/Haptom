@@ -28,11 +28,13 @@ public class UILevelPage : MonoBehaviour {
     }
 	//Return to MainMenu
 	public void Retun () {
+		AudioManager.instance.playClicMenu();
         Application.LoadLevel("MainMenu");
 	}
 	
 	// Load level
 	public void LoadLevel (int level) {
+		AudioManager.instance.playClicMenu();
         GameProperties.instance.setLevel(level);
         Application.LoadLevel("main");
 		print ("Chargement du lvl 1");
