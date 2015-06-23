@@ -23,6 +23,7 @@ public class AtomManager : MonoBehaviour
     IDictionary<GameObject, int> group_of_atom;
     IDictionary<int, HashSet<GameObject>> atoms_of_group;
     IDictionary<int, float> completion_of_group;
+    IDictionary<int, Vector3> center_of_group;
 
     List<string> atoms_needed;
 
@@ -118,21 +119,31 @@ public class AtomManager : MonoBehaviour
         }
     }
 
-    public void computeGroupCompletions(GameObject go)
+    public Vector3 getForce(Vector3 position)
     {
-        completion_of_group = new Dictionary<int, float>();
+        Vector3 res = new Vector3(0, 0);
+
+
         List<int> keys = new List<int>(atoms_of_group.Keys);
-        foreach (int i in keys)
+        if (keys.Count > 0)
         {
-            atoms_of_group[i].Add(go);
-            completion_of_group[i] = completionOf(atoms_of_group[i]);
-            atoms_of_group[i].Remove(go);
+            foreach (int i in keys)
+            {
+                float delta_x = center_of_group[i].x - position.x;
+                float delta_y = center_of_group[i].y - position.y;
+                float delta_norm = (float) Math.Sqrt(delta_x * delta_x + delta_y * delta_y);
+
+                if (delta_norm < 0.05) return new Vector3(0, 0);
+
+                res.x += completion_of_group[i] * delta_x / delta_norm;
+                res.y += completion_of_group[i] * delta_y / delta_norm;
+            }
+
+            res *= 2 / keys.Count;
         }
 
-        /*foreach (int i in completion_of_group.Keys)
-        {
-            Debug.Log("Completion of group " + i + ": " + completion_of_group[i]);
-        }*/
+
+        return res;
     }
 
     public bool isVictoryConditionValid()
@@ -143,6 +154,40 @@ public class AtomManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void computeGroupCentersAndCompletions(GameObject picked_go)
+    {
+        int nb_group = atoms_of_group.Count;
+
+
+        completion_of_group = new Dictionary<int, float>(nb_group);
+        center_of_group = new Dictionary<int, Vector3>(nb_group);
+        List<int> keys = new List<int>(atoms_of_group.Keys);
+        foreach (int i in keys)
+        {
+            //Completion part
+            atoms_of_group[i].Add(picked_go);
+            completion_of_group[i] = completionOf(atoms_of_group[i]);
+            atoms_of_group[i].Remove(picked_go);
+
+            //Center part
+            Vector3 center = new Vector3(0, 0);
+            foreach (GameObject go in atoms_of_group[i])
+            {
+                center.x += go.transform.position.x;
+                center.y += go.transform.position.y;
+            }
+            center.x /= atoms_of_group[i].Count;
+            center.y /= atoms_of_group[i].Count;
+
+            center_of_group[i] = center;
+        }
+
+        /*foreach (int i in completion_of_group.Keys)
+        {
+            Debug.Log("Completion of group " + i + ": " + completion_of_group[i]);
+        }*/
     }
 
     private float completionOf(HashSet<GameObject> atoms)
@@ -195,7 +240,7 @@ public class AtomManager : MonoBehaviour
 
         var child_go = new_atom_obj.transform.GetChild(0).gameObject;
         group_of_atom.Add(child_go, -1);
-        computeGroupCompletions(child_go);
+        computeGroupCentersAndCompletions(child_go);
     }
 
     public void SpawnCalcium()
