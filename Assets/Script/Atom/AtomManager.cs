@@ -25,11 +25,33 @@ public class AtomManager : MonoBehaviour
     IDictionary<int, HashSet<GameObject>> atoms_of_group;
     IDictionary<int, float> completion_of_group;
 
+    List<string> atoms_needed;
+
     // Use this for initialization
     void Awake()
     {
         group_of_atom = new Dictionary<GameObject, int>();
         atoms_of_group = new Dictionary<int, HashSet<GameObject>>();
+
+        int level;
+        try
+        {
+            level = GameProperties.instance.getLevel();
+        }
+        catch
+        {
+            level = 1;
+        }
+
+        atoms_needed = new List<string>();
+        switch (level)
+        {
+            case 1:
+                atoms_needed = new List<String> { "Hydrogen", "Hydrogen", "Oxygen" };
+                break;
+        }
+
+        atoms_needed.Sort();
     }
 
 
@@ -96,60 +118,57 @@ public class AtomManager : MonoBehaviour
     public void computeGroupCompletions()
     {
         completion_of_group = new Dictionary<int, float>();
-        foreach(int i in atoms_of_group.Keys) {
-
+        foreach (int i in atoms_of_group.Keys)
+        {
+            completion_of_group[i] = completionOf(atoms_of_group[i]);
         }
     }
 
     public bool isVictoryConditionValid()
     {
-        int level;
-        try
-        {
-            level = GameProperties.instance.getLevel();
-        }
-        catch
-        {
-            level = 1;
-        }
-
-        List<string> atom_needed = new List<string>();
-        switch (level)
-        {
-            case 1:
-                atom_needed = new List<String> { "Hydrogen", "Hydrogen", "Oxygen" };
-                break;
-        }
-
-        atom_needed.Sort();
-
-        bool success;
         for (int i = 0; i < atoms_of_group.Count; ++i)
         {
-
-            if (atoms_of_group[i].Count == atom_needed.Count)
-            {
-                success = true;
-                List<string> atoms_names = new List<string>();
-
-                foreach (GameObject atom in atoms_of_group[i])
-                {
-                    success &= atom.GetComponent<AtomCollider>().isValenceOK();
-                    atoms_names.Add(atom.GetComponent<AtomCollider>().getName());
-                }
-
-                atoms_names.Sort();
-
-                for (int j = 0; j < atom_needed.Count; ++j)
-                {
-                    success &= atom_needed[j] == atoms_names[j];
-                }
-
-                    if (success) return true;
-            }
+            if (completionOf(atoms_of_group[i]) == 1f) return true;
         }
 
         return false;
+    }
+
+    private float completionOf(HashSet<GameObject> atoms)
+    {
+        int nb_ok = 0;
+
+        List<string> atoms_names = new List<string>();
+        foreach (GameObject atom in atoms)
+        {
+            atoms_names.Add(atom.GetComponent<AtomCollider>().getName());
+        }
+
+        atoms_names.Sort();
+
+        int atoms_needed_index = 0;
+        for (int i = 0; i < atoms_names.Count; ++i)
+        {
+
+            int diff;
+
+            do
+            {
+                diff = atoms_names[i].CompareTo(atoms_needed[atoms_needed_index]);
+            } while (diff > 0);
+
+            if (diff == 0)
+            {
+                ++atoms_needed_index;
+                ++nb_ok;
+            }
+            else
+            {
+                return -1f;
+            }
+        }
+
+        return (nb_ok * 1f) / atoms_needed.Count;
     }
 
     private GameObject SpawnAtom(string name, float scale, float mass, Material material, int valence)
