@@ -44,16 +44,19 @@ public class CanvasManager : MonoBehaviour {
     public void ValiderMolecule()
     {
         bool result = AtomManager.instance.isVictoryConditionValid();
+		AudioManager.instance.playClicMenu();
 
         if (result)
         {
 
             ShowSuccess();
+			AudioManager.instance.playWinLevel();
             GameProperties.instance.AddLevelSucceeded();
         }
         else if (!result)
         {
-            ShowFail();
+			ShowFail();
+			AudioManager.instance.playLoseLevel();
 
         }
         else
