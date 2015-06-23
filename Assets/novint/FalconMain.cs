@@ -12,6 +12,8 @@ public class FalconMain : MonoBehaviour {
 	
 	// Use this for initialization
 	void Awake () {
+        DontDestroyOnLoad(gameObject);
+
 		my_num = getNextNum();
 		
 		if (my_num == 0) {

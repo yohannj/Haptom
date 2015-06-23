@@ -35,16 +35,18 @@ public class GameProperties : MonoBehaviour {
     }
 
     int LevelId;
-    List<int> listLevelSucceed=new List<int>();
+    HashSet<int> listLevelSucceed = new HashSet<int>();
 
-    public void AddLevelSucceeded(int i)
+    public void AddLevelSucceeded()
     {
-        listLevelSucceed.Add(i);
+        listLevelSucceed.Add(LevelId);
     }
 
     public List<int> getListSuccess()
     {
-        return listLevelSucceed;
+        List<int> res = new List<int>(listLevelSucceed);
+        res.Sort();
+        return res;
     }
 
     public void setLevel(int i)

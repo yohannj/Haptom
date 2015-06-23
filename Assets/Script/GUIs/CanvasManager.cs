@@ -44,12 +44,12 @@ public class CanvasManager : MonoBehaviour {
     public void ValiderMolecule()
     {
         bool result = AtomManager.instance.isVictoryConditionValid();
-        Debug.Log(result);
 
         if (result)
         {
 
             ShowSuccess();
+            GameProperties.instance.AddLevelSucceeded();
         }
         else if (!result)
         {
@@ -65,7 +65,7 @@ public class CanvasManager : MonoBehaviour {
 
     void ShowSuccess()
     {
-        GetComponent<UIPauseMenu>().setIsPausedBool(true);
+        isPaused = true;
         TimeValueSuccess.text = TimeValue.text;
 		Debug.Log (canvas.GetComponent<Score> ().score);
 		ScoreValueSucess.text = (canvas.GetComponent<Score> ().score).ToString();

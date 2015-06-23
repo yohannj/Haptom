@@ -49,6 +49,7 @@ public class AtomCollider : MonoBehaviour
                             transform.parent.GetComponent<Atom>().pick();
                             state = 1;
                             AtomManager.instance.UpdateAtomGroupWithPicked(gameObject);
+                            AtomManager.instance.computeGroupCompletions(gameObject);
                         }
                     }
                     break;
