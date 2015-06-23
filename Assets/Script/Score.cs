@@ -5,7 +5,7 @@ using System;
 
 public class Score : MonoBehaviour {
 
-	private Double score = 0f;
+	public Double score = 0f;
 	private GameObject GO;
 	private string timer;
 	private bool hint;
@@ -33,8 +33,8 @@ public class Score : MonoBehaviour {
 		if (time == 0)
 			time = 1;
 
-		score = Math.Truncate((1 / time) * 1000 * coefhint * coeflvl);
-		Debug.Log (score);
+		score = Math.Truncate((1800 - time)  * coefhint * coeflvl);
+		//Debug.Log (score);
 	}
 
 	public double GetLevelCoef(){
@@ -54,7 +54,7 @@ public class Score : MonoBehaviour {
 
 	public double GetHintCoef(){
 		double coef;
-		hint = false;
+		hint = GetComponent<HintManager>().getUsedHint();
 
 		if (!hint)
 			coef = 2;

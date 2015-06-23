@@ -1475,3 +1475,66 @@
 [dhdComUSB::processData():16.53.57.4582] - G_A
 [dhdComUSB::tryCalibration():16.53.57.5394] - HomeDisabled, LED Blue
 [dhdComUSB::processData():16.53.57.6531] - G_A
+[dhdComUSB::dhdComUSB():16.55.25.6531] - Constructor
+[dhdComUSB::close():16.55.25.6531] - Closed
+[dhdOpenWithReset():16.55.25.6740] - currentDevice = 0, l_serNum = 16000156, is NOT smart
+[dhdOpenWithReset():16.55.25.6833] - l_serNum after getFileName = 16000156
+[dhdOpenWithReset():16.55.25.6834] - Found falcon_12_0101.bin at C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin
+[dhdOpenWithReset():16.55.25.6834] - comUSB[0]open(16000156, C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin, False)
+[dhdComUSB::open():16.55.25.6834] - Open(C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin, false)
+[dhdComUSB::open():16.55.25.6851] - OpenUSBPort succeeded after 1 tries
+[dhdComUSB::open():16.55.25.6851] - deviceType = 0
+[dhdComUSB::open():16.55.25.6851] - deviceID   = 67357512d
+[dhdComUSB::open():16.55.25.6851] - deviceSN   = 16000156
+[dhdComUSB::open():16.55.25.6851] - deviceDesc = FALCON HAPTIC
+[dhdComUSB::OpenDeviceCommunications():16.55.25.6853] - Set Baud Rate Status: 0
+[dhdComUSB::OpenDeviceCommunications():16.55.25.7146] - update() failed
+[dhdComUSB::OpenDeviceCommunications():16.55.25.7446] - update() okay after 2 updates
+[dhdComUSB::OpenDeviceCommunications():16.55.25.7447] - Returning 0
+[dhdComUSB::changeGrip():16.55.25.9447] - New Grip: G_A
+[dhdComUSB::changeGrip():16.55.25.9448] - Started grip change
+[changeGripThreadFunc::16.55.25.9449] - deleting old grip object
+[changeGripThreadFunc::16.55.25.9449] - Loading grip type G_A
+[changeGripThreadFunc::16.55.25.9459] - Loading delta
+[dhdDelta():16.55.25.9460] - Did not find FalconCommon.txt
+[changeGripThreadFunc::16.55.25.9460] - Done loading new grip
+[dhdComUSB::processData():16.55.25.9726] - G_A
+[dhdComUSB::tryCalibration():16.55.26.0530] - HomeDisabled, LED Blue
+[dhdComUSB::processData():16.55.27.2538] - G_A
+[dhdComUSB::processData():16.55.27.7548] - G_A
+[dhdComUSB::processData():16.55.28.2547] - G_A
+[dhdComUSB::processData():16.55.29.7548] - G_A
+[dhdComUSB::processData():16.55.30.2559] - G_A
+[dhdComUSB::processData():16.55.31.2559] - G_A
+[dhdComUSB::processData():16.55.33.7560] - G_A
+[dhdComUSB::processData():16.55.35.7550] - G_A
+[dhdComUSB::processData():16.55.38.7561] - G_A
+[dhdComUSB::processData():16.55.39.7562] - G_A
+[dhdComUSB::processData():16.55.42.2574] - G_A
+[dhdComUSB::processData():16.55.42.7563] - G_A
+[dhdComUSB::dhdComUSB():16.55.48.7605] - Constructor
+[dhdComUSB::close():16.55.48.7606] - Closed
+[dhdOpenWithReset():16.55.48.8033] - currentDevice = 0, l_serNum = 16000156, is NOT smart
+[dhdOpenWithReset():16.55.48.8175] - l_serNum after getFileName = 16000156
+[dhdOpenWithReset():16.55.48.8176] - Found falcon_12_0101.bin at C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin
+[dhdOpenWithReset():16.55.48.8176] - comUSB[0]open(16000156, C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin, False)
+[dhdComUSB::open():16.55.48.8176] - Open(C:\Program Files (x86)\Novint\Falcon\HDAL\bin\falcon_12_0101.bin, false)
+[dhdComUSB::open():16.55.48.8194] - OpenUSBPort succeeded after 1 tries
+[dhdComUSB::open():16.55.48.8194] - deviceType = 0
+[dhdComUSB::open():16.55.48.8195] - deviceID   = 67357512d
+[dhdComUSB::open():16.55.48.8195] - deviceSN   = 16000156
+[dhdComUSB::open():16.55.48.8195] - deviceDesc = FALCON HAPTIC
+[dhdComUSB::OpenDeviceCommunications():16.55.48.8196] - Set Baud Rate Status: 0
+[dhdComUSB::OpenDeviceCommunications():16.55.48.8496] - update() failed
+[dhdComUSB::OpenDeviceCommunications():16.55.48.8797] - update() okay after 2 updates
+[dhdComUSB::OpenDeviceCommunications():16.55.48.8798] - Returning 0
+[dhdComUSB::changeGrip():16.55.49.0798] - New Grip: G_A
+[dhdComUSB::changeGrip():16.55.49.0800] - Started grip change
+[changeGripThreadFunc::16.55.49.0802] - deleting old grip object
+[changeGripThreadFunc::16.55.49.0802] - Loading grip type G_A
+[changeGripThreadFunc::16.55.49.0817] - Loading delta
+[dhdDelta():16.55.49.0818] - Did not find FalconCommon.txt
+[changeGripThreadFunc::16.55.49.0818] - Done loading new grip
+[dhdComUSB::processData():16.55.49.1076] - G_A
+[dhdComUSB::tryCalibration():16.55.49.1885] - HomeDisabled, LED Blue
+[dhdComUSB::processData():16.55.49.3036] - G_A
