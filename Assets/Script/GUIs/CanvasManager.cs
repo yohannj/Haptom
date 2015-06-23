@@ -47,6 +47,7 @@ public class CanvasManager : MonoBehaviour {
         {
 
             ShowSuccess();
+            GameProperties.instance.AddLevelSucceeded();
         }
         else if (!result)
         {
