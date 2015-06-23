@@ -29,7 +29,6 @@ public class AtomGUI : MonoBehaviour
                 if (atom_created)
                 {
                     atom_already_created = true;
-                    GameObject new_atom;
                     var atom_name = transform.parent.name;
 
                     setHalo(false);
@@ -38,20 +37,19 @@ public class AtomGUI : MonoBehaviour
                     switch (atom_name)
                     {
                         case "Calcium":
-                            new_atom = AtomManager.instance.SpawnCalcium();
-                            //new_atom.transform = Falcon.instance
+                            AtomManager.instance.SpawnCalcium();
                             break;
                         case "Carbon":
-                            new_atom = AtomManager.instance.SpawnCarbon();
+                            AtomManager.instance.SpawnCarbon();
                             break;
                         case "Hydrogen":
-                            new_atom = AtomManager.instance.SpawnHydrogen();
+                            AtomManager.instance.SpawnHydrogen();
                             break;
                         case "Nitrogen":
-                            new_atom = AtomManager.instance.SpawnNitrogen();
+                            AtomManager.instance.SpawnNitrogen();
                             break;
                         case "Oxygen":
-                            new_atom = AtomManager.instance.SpawnOxygen();
+                            AtomManager.instance.SpawnOxygen();
                             break;
                         default:
                             throw new Exception("Atom name not recognized in switch");

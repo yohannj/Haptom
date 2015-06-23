@@ -37,7 +37,10 @@ public class Atom : MonoBehaviour
             transform.position = my_init_picked_pos + diff_pos_falcon;
 
             //Add force when the user picked an atom
-            FalconUnity.applyForce(0, new Vector3(0, -(1 + mass / 8)), 0.2f);
+            Vector3 force = new Vector3(0, -(1 + mass / 8)); //Create force vector, init with his weight
+
+
+            FalconUnity.applyForce(0, force, 0.2f);
         }
     }
 
