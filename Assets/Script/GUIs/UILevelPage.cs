@@ -32,7 +32,8 @@ public class UILevelPage : MonoBehaviour {
 	}
 	
 	// Load level
-	public void LoadLevel () {
+	public void LoadLevel (int level) {
+        GameProperties.instance.setLevel(level);
         Application.LoadLevel("main");
 		print ("Chargement du lvl 1");
 	}
