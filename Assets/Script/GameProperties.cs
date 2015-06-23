@@ -6,6 +6,8 @@ using System.IO;
 
 public class GameProperties : MonoBehaviour {
 
+
+    //public TextAsset test;
     private static GameProperties _instance;
 
     public static GameProperties instance
@@ -59,9 +61,8 @@ public class GameProperties : MonoBehaviour {
 
     public void setLevel(int i)
     {
-        var path = Path.Combine(Directory.GetCurrentDirectory(), "\\ressources\\haptom.tsv");
-        Debug.Log(path);
-        string[] lines = File.ReadAllLines(path);
+        TextAsset txt = (TextAsset)Resources.Load("haptom");
+        string[] lines = txt.text.Split('\n');
         string[] data = lines[i].Split('\t');
         molecule_name = data[0];
         molecule_hint = data[1];
