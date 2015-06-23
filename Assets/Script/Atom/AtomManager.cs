@@ -15,7 +15,6 @@ public class AtomManager : MonoBehaviour
             if (_instance == null)
             {
                 _instance = GameObject.FindObjectOfType<AtomManager>();
-                DontDestroyOnLoad(_instance.gameObject);
             }
             return _instance;
         }
@@ -115,12 +114,18 @@ public class AtomManager : MonoBehaviour
         atoms_of_group[group_of_atom[go]].Remove(go);
     }
 
-    public void computeGroupCompletions()
+    public void computeGroupCompletions(GameObject go)
     {
         completion_of_group = new Dictionary<int, float>();
         foreach (int i in atoms_of_group.Keys)
         {
+            atoms_of_group[i].Add(go);
             completion_of_group[i] = completionOf(atoms_of_group[i]);
+            atoms_of_group[i].Remove(go);
+        }
+
+        foreach(int i in completion_of_group.Keys) {
+            Debug.Log("Completion of group i: " + completion_of_group[i]);
         }
     }
 
