@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -26,7 +27,7 @@ public class UILevelPage : MonoBehaviour {
     {
         List<int> listLevelSucceded = GameProperties.instance.getListSuccess();
 
-        panelsCad = GameObject.FindGameObjectsWithTag("ButtonPanel");
+        panelsCad = GameObject.FindGameObjectsWithTag("PanelButton");
 
 
         panelHe = GameObject.Find("ButtonHe");
@@ -34,7 +35,7 @@ public class UILevelPage : MonoBehaviour {
         panelBe = GameObject.Find("Buttonbe");
         panelB = GameObject.Find("ButtonB");
 
-        if (listLevelSucceded.Count == 0)
+        if (listLevelSucceded.Count>5)
         {
             panelTab2 = GameObject.FindGameObjectWithTag("Tab2");
             panelTab2.gameObject.SetActive(false);
@@ -69,7 +70,7 @@ public class UILevelPage : MonoBehaviour {
     {
         foreach (GameObject panel in panelsCad)
         {
-            panel.gameObject.SetActive(false);
+            panel.GetComponent<Button>().enabled = false;
             panel.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 1;
         }
 
@@ -77,7 +78,7 @@ public class UILevelPage : MonoBehaviour {
         {
             case 0: break;
 
-            case 1: panelHe.gameObject.SetActive(true);
+            case 1: panelHe.GetComponent<Button>().enabled = true;
                     panelHe.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
                     break;
 
