@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
 	public AudioClip winlevel;
 	public AudioClip loselevel;
 	public AudioClip clicmenu;
+	private AudioClip Toplay;
 
     public void playMouseOverFalseGUI()
     {
@@ -29,16 +30,19 @@ public class AudioManager : MonoBehaviour
 
 	public void playWinLevel()
 	{
-		GetComponent<AudioSource>().PlayOneShot(winlevel);
+		GetComponent<AudioSource> ().clip = winlevel;
+		if(!GetComponent<AudioSource>().isPlaying)
+			GetComponent<AudioSource>().Play();
 	}
 
 	public void playLoseLevel()
 	{
-		GetComponent<AudioSource>().PlayOneShot(loselevel);
+		GetComponent<AudioSource> ().clip = loselevel;
+		if(!GetComponent<AudioSource>().isPlaying)
+			GetComponent<AudioSource>().Play();
 	}
 	public void playClicMenu()
 	{
 		GetComponent<AudioSource>().PlayOneShot(clicmenu);
 	}
-
 }
