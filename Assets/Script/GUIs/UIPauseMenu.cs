@@ -72,7 +72,7 @@ public class UIPauseMenu : MonoBehaviour
 
     public void NextLevel()
     {
-        int level = GameProperties.instance.getListSuccess().Count;
+        int level = GameProperties.instance.getLevel();
         AudioManager.instance.playClicMenu();
         level = level + 1;
         if (level < 6)

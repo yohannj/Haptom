@@ -131,7 +131,7 @@ public class AtomManager : MonoBehaviour
                 res.y += completion_of_group[i] * delta_y / delta_norm;
             }
 
-            res *= 2 / keys.Count;
+            res *= 3 / keys.Count;
         }
 
 

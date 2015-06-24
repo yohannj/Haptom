@@ -98,7 +98,7 @@ public class GameProperties : MonoBehaviour {
         return explications;
     }
 
-    public string getMassMolar()
+    public string getMolarMass()
     {
         return mass_molar;
     }

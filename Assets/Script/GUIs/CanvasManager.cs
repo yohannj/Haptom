@@ -18,15 +18,20 @@ public class CanvasManager : MonoBehaviour {
 	void Start () {
         timer = 0f;
 
+        GameObject.Find("Question").GetComponent<Text>().text = "Make the " + GameProperties.instance.getMoleculeName() + " molecule";
+        GameObject.Find("Hint_value").GetComponent<Text>().text = GameProperties.instance.getMoleculeHint();
+        GameObject.Find("Explication").GetComponent<Text>().text = GameProperties.instance.getExplications();
+        GameObject.Find("Donnees").GetComponent<Text>().text = "Molar mass: " + GameProperties.instance.getMolarMass() + "\nDensity: " + GameProperties.instance.getDensity();
+
         panelSuccess = GameObject.FindGameObjectWithTag("PanelSuccess");
         panelSuccess.gameObject.SetActive(false);
         panelFail = GameObject.FindGameObjectWithTag("PanelFail");
         panelFail.gameObject.SetActive(false);
-		canvas = GameObject.FindGameObjectWithTag("Canvas");
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
 
         _canvasGroupSuccess.alpha = 0;
         _canvasGroupFail.alpha = 0;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -70,7 +75,6 @@ public class CanvasManager : MonoBehaviour {
     {
         isPaused = true;
         TimeValueSuccess.text = TimeValue.text;
-		Debug.Log (canvas.GetComponent<Score> ().score);
 		ScoreValueSucess.text = (canvas.GetComponent<Score> ().score).ToString();
 
         bool hintUsedValue = GetComponent<HintManager>().getUsedHint();
