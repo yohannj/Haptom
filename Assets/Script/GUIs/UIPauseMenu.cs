@@ -70,6 +70,24 @@ public class UIPauseMenu : MonoBehaviour
         Application.LoadLevel("LevelPage");
     }
 
+    public void NextLevel()
+    {
+        int level = GameProperties.instance.getListSuccess().Count;
+        AudioManager.instance.playClicMenu();
+        level = level + 1;
+        if (level < 6)
+        {
+            GameProperties.instance.setLevel(level);
+            Application.LoadLevel("main");
+        }
+        else
+        {
+            Application.LoadLevel("LevelPage");
+        }
+        
+    }
+
+
     //Quit Game
     public void QuitGame()
     {
