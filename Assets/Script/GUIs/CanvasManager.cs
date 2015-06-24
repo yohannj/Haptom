@@ -53,7 +53,6 @@ public class CanvasManager : MonoBehaviour {
 
         if (result)
         {
-
             ShowSuccess();
 			AudioManager.instance.playWinLevel();
             GameProperties.instance.AddLevelSucceeded();

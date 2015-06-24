@@ -32,7 +32,7 @@ public class UILevelPage : MonoBehaviour {
 
         panelHe = GameObject.Find("ButtonHe");
         panelLi = GameObject.Find("ButtonLi");
-        panelBe = GameObject.Find("Buttonbe");
+        panelBe = GameObject.Find("ButtonBe");
         panelB = GameObject.Find("ButtonB");
 
         if (listLevelSucceded.Count<5)
