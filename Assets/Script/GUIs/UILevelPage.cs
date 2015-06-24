@@ -35,7 +35,7 @@ public class UILevelPage : MonoBehaviour {
         panelBe = GameObject.Find("Buttonbe");
         panelB = GameObject.Find("ButtonB");
 
-        if (listLevelSucceded.Count>5)
+        if (listLevelSucceded.Count<5)
         {
             panelTab2 = GameObject.FindGameObjectWithTag("Tab2");
             panelTab2.gameObject.SetActive(false);
