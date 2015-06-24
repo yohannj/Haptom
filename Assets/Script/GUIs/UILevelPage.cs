@@ -82,33 +82,33 @@ public class UILevelPage : MonoBehaviour {
                     panelHe.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
                     break;
 
-            case 2: panelHe.gameObject.SetActive(true);
+            case 2: panelHe.GetComponent<Button>().enabled = true;
                     panelHe.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
-                    panelLi.gameObject.SetActive(true);
+                    panelLi.GetComponent<Button>().enabled = true;
                     panelLi.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
                     break;
 
-            case 3: panelHe.gameObject.SetActive(true);
+            case 3: panelHe.GetComponent<Button>().enabled = true;
                     panelHe.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
-                    panelLi.gameObject.SetActive(true);
+                    panelLi.GetComponent<Button>().enabled = true;
                     panelLi.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
-                    panelBe.gameObject.SetActive(true);
+                    panelBe.GetComponent<Button>().enabled = true;
                     panelBe.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
                     break;
 
-            case 4: panelHe.gameObject.SetActive(true);
+            case 4: panelHe.GetComponent<Button>().enabled = true;
                     panelHe.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
-                    panelLi.gameObject.SetActive(true);
+                    panelLi.GetComponent<Button>().enabled = true;
                     panelLi.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
-                    panelBe.gameObject.SetActive(true);
+                    panelBe.GetComponent<Button>().enabled = true;
                     panelBe.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
-                    panelB.gameObject.SetActive(true);
+                    panelB.GetComponent<Button>().enabled = true;
                     panelB.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
                     break;
 
             case 5: foreach (GameObject panel in panelsCad)
                     {
-                        panel.gameObject.SetActive(true);
+                        panel.GetComponent<Button>().enabled = true;
                         panel.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
                     }
                     break;
