@@ -4169,3 +4169,5 @@
 [changeGripThreadFunc::21.25.53.1483] - Done loading new grip
 [dhdComUSB::processData():21.25.53.1734] - G_A
 [dhdComUSB::tryCalibration():21.25.53.2540] - HomeDisabled, LED Blue
+[dhdComUSB::dhdComUSB():21.59.50.9143] - Constructor
+[dhdComUSB::close():21.59.50.9144] - Closed

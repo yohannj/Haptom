@@ -123,7 +123,7 @@ public class AtomManager : MonoBehaviour
             {
                 float delta_x = center_of_group[i].x - position.x;
                 float delta_y = center_of_group[i].y - position.y;
-                float delta_norm = (float) Math.Sqrt(delta_x * delta_x + delta_y * delta_y);
+                float delta_norm = (float)Math.Sqrt(delta_x * delta_x + delta_y * delta_y);
 
                 if (delta_norm < 0.05) return new Vector3(0, 0);
 
@@ -142,10 +142,20 @@ public class AtomManager : MonoBehaviour
     {
         for (int i = 0; i < atoms_of_group.Count; ++i)
         {
-            if (completionOf(atoms_of_group[i]) == 1f) return true;
+            if (completionOf(atoms_of_group[i]) == 1f && isGroupValenceOK(atoms_of_group[i])) return true;
         }
 
         return false;
+    }
+
+    public bool isGroupValenceOK(HashSet<GameObject> atoms_go)
+    {
+        foreach (GameObject go in atoms_go)
+        {
+            if (!go.GetComponent<AtomCollider>().isValenceOK()) return false;
+        }
+
+        return true;
     }
 
     public void computeGroupCentersAndCompletions(GameObject picked_go)
@@ -262,7 +272,10 @@ public class AtomManager : MonoBehaviour
 
     public void DestroyedAtom(GameObject go)
     {
+        int group = group_of_atom[go];
         group_of_atom.Remove(go);
+        atoms_of_group[group].Remove(go);
+
     }
 
 }
